@@ -29,6 +29,21 @@ var albumMarconi = {
     ]
 };
 
+var albumEinstein = {
+    title: 'The Elements',
+    artist: 'Albert Einstein',
+    label: 'AE',
+    year: '1800',
+    albumArtUrl: 'assets/images/album_covers/14.png',
+    songs: [
+        { title: 'Atoms', duration: '2;45' },
+        { title: 'Mercury', duration: '3:22' },
+        { title: 'H2O', duration: '3:07'},
+        { title: 'Uranium', duration: '4:03' },
+        { title: 'Carbon', duration: '2:33'}
+    ]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
     var template =
        '<tr class="album-view-song-item">'
@@ -40,13 +55,14 @@ var createSongRow = function(songNumber, songName, songLength) {
 
     return template;
 };
-var setCurrentAlbum = function(album) {
-    var albumTitle = document.getElementsByClassName('album-view-title')[0];
-    var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-    var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-    var albumImage = document.getElementsByClassName('album-cover-art')[0];
-    var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
+var setCurrentAlbum = function(album) {
     albumTitle.firstChild.nodeValue = album.title;
     albumArtist.firstChild.nodeValue = album.artist;
     albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
@@ -61,4 +77,14 @@ var setCurrentAlbum = function(album) {
 
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
+
+  var albums = [albumPicasso, albumMarconi, albumEinstein];
+  var index = 1;
+  albumImage.addEventListener("click", function(event) {
+  setCurrentAlbum(albums[index]);
+  index ++;
+  if (index == albums.length){
+    index = 0;
+  }
+  });
 };
