@@ -74,26 +74,14 @@ var setCurrentAlbum = function(album) {
         albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
     }
 };
-// finds current parent of given element that matches specific name
-var findParentByClassName = function (element, targetClass){
-  // checks for element
+var findParentByClassName = function(element, targetClass) {
     if (element) {
-  // sets variable as parent of element that was passed
-      var currentParent = element.parentElement;
-  // check to see if element has a parent
-  if (currentParent === null ){
-    console.log("No parent found.")
-  }
-  // loop to check if current does not equal specific name we are looking, move up to next parent element
-      while (currentParent.className !== targetClass && currentParent.className !== null) {
-        currentParent = currentParent.parentElement;
-  // if loop moved all the way through parent elements then class doesn't exist
-      if (currentParent.className === targetClass){
-        console.log("No parent with that class name found. ")
-      }
+        var currentParent = element.parentElement;
+        while (currentParent.className !== targetClass && currentParent.className !== null) {
+            currentParent = currentParent.parentElement;
+        }
+        return currentParent;
     }
-  }
-  return currentParent ;
 };
 
 var getSongItem = function (element){
